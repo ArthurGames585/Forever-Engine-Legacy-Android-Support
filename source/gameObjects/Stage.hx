@@ -343,7 +343,41 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				bg.scale.set(6, 6);
 				add(bg);
 				
-			case 'tank': //Week 7 - Ugh, Guns, Stress
+			
+			default:
+				PlayState.defaultCamZoom = 0.9;
+				curStage = 'stage';
+				var bg:FNFSprite = new FNFSprite(-600, -200).loadGraphic(Paths.image('backgrounds/' + curStage + '/stageback'));
+				bg.antialiasing = true;
+				bg.scrollFactor.set(0.9, 0.9);
+				bg.active = false;
+
+				// add to the final array
+				add(bg);
+
+				var stageFront:FNFSprite = new FNFSprite(-650, 600).loadGraphic(Paths.image('backgrounds/' + curStage + '/stagefront'));
+				stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
+				stageFront.updateHitbox();
+				stageFront.antialiasing = true;
+				stageFront.scrollFactor.set(0.9, 0.9);
+				stageFront.active = false;
+
+				// add to the final array
+				add(stageFront);
+
+				var stageCurtains:FNFSprite = new FNFSprite(-500, -300).loadGraphic(Paths.image('backgrounds/' + curStage + '/stagecurtains'));
+				stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
+				stageCurtains.updateHitbox();
+				stageCurtains.antialiasing = true;
+				stageCurtains.scrollFactor.set(1.3, 1.3);
+				stageCurtains.active = false;
+
+				// add to the final array
+				add(stageCurtains);
+		}
+	}
+	
+	case 'tank': //Week 7 - Ugh, Guns, Stress
 			
 			switch (curStage)
 		{
@@ -405,45 +439,6 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				foregroundSprites.add(new BGSprite('backgrounds/' + curStage + '/tank5', 1620, 700, 1.5, 1.5, ['fg']));
 				foregroundSprites.add(new BGSprite('backgrounds/' + curStage + '/tank3', 1300, 1200, 3.5, 2.5, ['fg']));
 		}
-
-		switch(Paths.formatToSongPath(SONG.song))
-		{
-			case 'stress':
-				GameOverSubstate.characterName = 'bf-holding-gf-dead';
-		}
-
-			default:
-				PlayState.defaultCamZoom = 0.9;
-				curStage = 'stage';
-				var bg:FNFSprite = new FNFSprite(-600, -200).loadGraphic(Paths.image('backgrounds/' + curStage + '/stageback'));
-				bg.antialiasing = true;
-				bg.scrollFactor.set(0.9, 0.9);
-				bg.active = false;
-
-				// add to the final array
-				add(bg);
-
-				var stageFront:FNFSprite = new FNFSprite(-650, 600).loadGraphic(Paths.image('backgrounds/' + curStage + '/stagefront'));
-				stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
-				stageFront.updateHitbox();
-				stageFront.antialiasing = true;
-				stageFront.scrollFactor.set(0.9, 0.9);
-				stageFront.active = false;
-
-				// add to the final array
-				add(stageFront);
-
-				var stageCurtains:FNFSprite = new FNFSprite(-500, -300).loadGraphic(Paths.image('backgrounds/' + curStage + '/stagecurtains'));
-				stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
-				stageCurtains.updateHitbox();
-				stageCurtains.antialiasing = true;
-				stageCurtains.scrollFactor.set(1.3, 1.3);
-				stageCurtains.active = false;
-
-				// add to the final array
-				add(stageCurtains);
-		}
-	}
 
 	// return the girlfriend's type
 	public function returnGFtype(curStage)
