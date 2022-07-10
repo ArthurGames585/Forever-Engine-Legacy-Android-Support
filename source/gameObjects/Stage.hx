@@ -342,10 +342,9 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				bg.scale.set(6, 6);
 				add(bg);
 			case 'tank':
-				  {
-						defaultCamZoom = 0.9;
-
 						curStage = 'tank';
+
+						PlayState.defaultCamZoom = 0.9;
 						
 						var sky:BGSprite = new BGSprite('backgrounds/' + curStage + '/tankSky', -400, -400, 0, 0);
 						add(sky);
@@ -408,6 +407,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 						
 						var tankdude3:BGSprite = new BGSprite('backgrounds/' + curStage + '/tank3', 1300, 1200, 3.5, 2.5, ['fg']);
 						foregroundSprites.add(tankdude3);
+					
 			default:
 				PlayState.defaultCamZoom = 0.9;
 				curStage = 'stage';
