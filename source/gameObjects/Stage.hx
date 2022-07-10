@@ -46,8 +46,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 
 	var bgGirls:BackgroundGirls;
 	
-	var tankWatchtower:BGSprite;
-	var tankGround:BGSprite;
+	var tankWatchtower:FNFSprite;
+	var tankGround:FNFSprite;
 	var tankmanRun:FlxTypedGroup<TankmenBG>;
 
 	public var curStage:String;
