@@ -45,6 +45,11 @@ class Stage extends FlxTypedGroup<FlxBasic>
 	var santa:FNFSprite;
 
 	var bgGirls:BackgroundGirls;
+	
+	var tankWatchtower:BGSprite;
+	var tankGround:BGSprite;
+	var tankmanRun:FlxTypedGroup<TankmenBG>;
+	var foregroundSprites:FlxTypedGroup<BGSprite>;
 
 	public var curStage:String;
 
@@ -78,6 +83,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					curStage = 'school';
 				case 'thorns':
 					curStage = 'schoolEvil';
+				case 'ugh' | 'guns' | 'stress':
+					curStage = 'tank';
 				default:
 					curStage = 'stage';
 			}
@@ -335,6 +342,75 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				bg.scrollFactor.set(0.8, 0.9);
 				bg.scale.set(6, 6);
 				add(bg);
+				
+			case 'tank': //Week 7 - Ugh, Guns, Stress
+			
+			switch (curStage)
+		{
+			case 'tank':
+				add(foregroundSprites);
+
+				var sky:BGSprite = new BGSprite('tankSky', -400, -400, 0, 0);
+				add(sky);
+				
+					var clouds:BGSprite = new BGSprite('backgrounds/' + curStage + '/tankClouds', FlxG.random.int(-700, -100), FlxG.random.int(-20, 20), 0.1, 0.1);
+					clouds.active = true;
+					clouds.velocity.x = FlxG.random.float(5, 15);
+					add(clouds);
+
+					var mountains:BGSprite = new BGSprite('backgrounds/' + curStage + '/tankMountains', -300, -20, 0.2, 0.2);
+					mountains.setGraphicSize(Std.int(1.2 * mountains.width));
+					mountains.updateHitbox();
+					add(mountains);
+
+					var buildings:BGSprite = new BGSprite('backgrounds/' + curStage + '/tankBuildings', -200, 0, 0.3, 0.3);
+					buildings.setGraphicSize(Std.int(1.1 * buildings.width));
+					buildings.updateHitbox();
+					add(buildings);
+				}
+
+				var ruins:BGSprite = new BGSprite('backgrounds/' + curStage + '/tankRuins',-200,0,.35,.35);
+				ruins.setGraphicSize(Std.int(1.1 * ruins.width));
+				ruins.updateHitbox();
+				add(ruins);
+
+				if(!ClientPrefs.lowQuality)
+				{
+					var smokeLeft:BGSprite = new BGSprite('backgrounds/' + curStage + '/smokeLeft', -200, -100, 0.4, 0.4, ['SmokeBlurLeft'], true);
+					add(smokeLeft);
+					var smokeRight:BGSprite = new BGSprite('backgrounds/' + curStage + '/smokeRight', 1100, -100, 0.4, 0.4, ['SmokeRight'], true);
+					add(smokeRight);
+
+					tankWatchtower = new BGSprite('backgrounds/' + curStage + '/tankWatchtower', 100, 50, 0.5, 0.5, ['watchtower gradient color']);
+					add(tankWatchtower);
+				}
+
+				tankGround = new BGSprite('backgrounds/' + curStage + '/tankRolling', 300, 300, 0.5, 0.5,['BG tank w lighting'], true);
+				add(tankGround);
+
+				tankmanRun = new FlxTypedGroup<TankmenBG>();
+				add(tankmanRun);
+
+				var ground:BGSprite = new BGSprite('backgrounds/' + curStage + '/tankGround', -420, -150);
+				ground.setGraphicSize(Std.int(1.15 * ground.width));
+				ground.updateHitbox();
+				add(ground);
+				moveTank();
+
+				foregroundSprites = new FlxTypedGroup<BGSprite>();
+				foregroundSprites.add(new BGSprite('backgrounds/' + curStage + '/tank0', -500, 650, 1.7, 1.5, ['fg']));
+				foregroundSprites.add(new BGSprite('backgrounds/' + curStage + '/tank1', -300, 750, 2, 0.2, ['fg']));
+				foregroundSprites.add(new BGSprite('backgrounds/' + curStage + '/tank2', 450, 940, 1.5, 1.5, ['foreground']));
+				foregroundSprites.add(new BGSprite('backgrounds/' + curStage + '/tank4', 1300, 900, 1.5, 1.5, ['fg']));
+				foregroundSprites.add(new BGSprite('backgrounds/' + curStage + '/tank5', 1620, 700, 1.5, 1.5, ['fg']));
+				foregroundSprites.add(new BGSprite('backgrounds/' + curStage + '/tank3', 1300, 1200, 3.5, 2.5, ['fg']));
+		}
+
+		switch(Paths.formatToSongPath(SONG.song))
+		{
+			case 'stress':
+				GameOverSubstate.characterName = 'bf-holding-gf-dead';
+		}
 
 			default:
 				PlayState.defaultCamZoom = 0.9;
@@ -384,6 +460,34 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				gfVersion = 'gf-pixel';
 			case 'schoolEvil':
 				gfVersion = 'gf-pixel';
+			case 'tank':
+					gfVersion = 'gf-tankmen';
+		}
+		
+		switch(Paths.formatToSongPath(SONG.song))
+			{
+				case 'stress':
+					gfVersion = 'pico-speaker';
+			}
+			
+			if(gfVersion == 'pico-speaker')
+				{
+					var firstTank:TankmenBG = new TankmenBG(20, 500, true);
+					firstTank.resetShit(20, 600, true);
+					firstTank.strumTime = 10;
+					tankmanRun.add(firstTank);
+
+					for (i in 0...TankmenBG.animationNotes.length)
+					{
+						if(FlxG.random.bool(16)) {
+							var tankBih = tankmanRun.recycle(TankmenBG);
+							tankBih.strumTime = TankmenBG.animationNotes[i][0];
+							tankBih.resetShit(500, 200 + FlxG.random.int(50, 100), TankmenBG.animationNotes[i][1] < 2);
+							tankmanRun.add(tankBih);
+						}
+					}
+				}
+			}
 		}
 
 		return gfVersion;
