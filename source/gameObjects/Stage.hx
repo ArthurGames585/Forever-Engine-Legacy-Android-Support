@@ -55,9 +55,6 @@ class Stage extends FlxTypedGroup<FlxBasic>
 	var daPixelZoom = PlayState.daPixelZoom;
 
 	public var foregroundSprites:FlxTypedGroup<FlxBasic>;
-	
-	Conductor.mapBPMChanges(SONG);
-	Conductor.changeBPM(SONG.bpm);
 
 	public function new(curStage)
 	{
