@@ -377,15 +377,11 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		}
 	}
 	
-	case 'tank': //Week 7 - Ugh, Guns, Stress
-			
-			switch (curStage)
-		{
-			case 'tank':
-				add(foregroundSprites);
+	case 'tank': 
+				   add(foregroundSprites);
 
-				var sky:BGSprite = new BGSprite('tankSky', -400, -400, 0, 0);
-				add(sky);
+				    var sky:BGSprite = new BGSprite('backgrounds/' + curStage + '/tankSky', -400, -400, 0, 0);
+				    add(sky);
 				
 					var clouds:BGSprite = new BGSprite('backgrounds/' + curStage + '/tankClouds', FlxG.random.int(-700, -100), FlxG.random.int(-20, 20), 0.1, 0.1);
 					clouds.active = true;
