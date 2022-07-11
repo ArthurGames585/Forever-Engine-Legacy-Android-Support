@@ -51,10 +51,13 @@ class Stage extends FlxTypedGroup<FlxBasic>
 	var tankmanRun:FlxTypedGroup<TankmenBG>;
 
 	public var curStage:String;
+	
+	private var gf:Character;
 
 	var daPixelZoom = PlayState.daPixelZoom;
 
 	public var foregroundSprites:FlxTypedGroup<FlxBasic>;
+	public var foreground:FlxTypedGroup<FlxBasic>;
 
 	public function new(curStage)
 	{
@@ -93,6 +96,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 
 		// to apply to foreground use foreground.add(); instead of add();
 		foregroundSprites = new FlxTypedGroup<FlxBasic>();
+		foreground = new FlxTypedGroup<FlxBasic>();
+		
 
 		//
 		switch (curStage)
@@ -345,66 +350,81 @@ class Stage extends FlxTypedGroup<FlxBasic>
 						PlayState.defaultCamZoom = 0.9;
 						curStage = 'tank';
 						
-						var sky:FNFSprite = new FNFSprite('backgrounds/' + curStage + '/tankSky', -400, -400, 0, 0);
+						var sky:FNFSprite = new FNFSprite(-400, -400).loadGraphic(Paths.image('backgrounds/' + curStage + '/tankSky'));
 						add(sky);
 						
-						var clouds:FNFSprite = new FNFSprite('backgrounds/' + curStage + '/tankClouds', FlxG.random.int(-700, -100), FlxG.random.int(-20, 20), 0.1, 0.1);
+						var clouds:FNFSprite = new FNFSprite(-700, -100).loadGraphic(Paths.image('backgrounds/' + curStage + '/tankClouds'));
 						clouds.active = true;
+						FlxG.random.int(-20, 20);
+						clouds.scrollFactor.set(0.1, 0.1);
 						clouds.velocity.x = FlxG.random.float(5, 15);
 						add(clouds);
 						
-						var mountains:FNFSprite = new FNFSprite('backgrounds/' + curStage + '/tankMountains', -300, -20, 0.2, 0.2);
+						var mountains:FNFSprite = new FNFSprite(-300, -20).loadGraphic(Paths.image('backgrounds/' + curStage + '/tankMountains'));
 						mountains.setGraphicSize(Std.int(mountains.width * 1.2));
+						mountains.scrollFactor.set(0.2, 0.2);
 						mountains.updateHitbox();
 						add(mountains);
 						
-						var buildings:FNFSprite = new FNFSprite('backgrounds/' + curStage + '/tankBuildings', -200, 0, 0.3, 0.3);
+						var buildings:FNFSprite = new FNFSprite(-200, 0).loadGraphic(Paths.image('backgrounds/' + curStage + '/tankBuildings'));
 						buildings.setGraphicSize(Std.int(buildings.width * 1.1));
+						buildings.scrollFactor.set(0.3, 0.3);
 						buildings.updateHitbox();
 						add(buildings);
 						
-						var ruins:FNFSprite = new FNFSprite('backgrounds/' + curStage + '/tankRuins', -200, 0, 0.35, 0.35);
+						var ruins:FNFSprite = new FNFSprite(-200, 0).loadGraphic(Paths.image('backgrounds/' + curStage + '/tankRuins'));
 						ruins.setGraphicSize(Std.int(ruins.width * 1.1));
+						ruins.scrollFactor.set(0.35, 0.35);
 						ruins.updateHitbox();
 						add(ruins);
 						
-						var smokeL:FNFSprite = new FNFSprite('backgrounds/' + curStage + '/smokeLeft', -200, -100, 0.4, 0.4, ['SmokeBlurLeft'], true);
+						var smokeL:FNFSprite = new FNFSprite(-200, -100).loadGraphic(Paths.image('backgrounds/' + curStage + '/smokeLeft', ['SmokeBlurLeft'], true));
+						smokeL.scrollFactor.set(0.4, 0.4);
 						add(smokeL);
 						
-						var smokeR:FNFSprite = new FNFSprite('backgrounds/' + curStage + '/smokeRight', 1100, -100, 0.4, 0.4, ['SmokeRight'], true);
+						var smokeR:FNFSprite = new FNFSprite(1100, -100).loadGraphic(Paths.image('backgrounds/' + curStage + '/smokeRight', ['SmokeRight'], true));
+						smokeR.scrollFactor.set(0.4, 0.4);
 						add(smokeR);
 						
-						tankWatchtower = new FNFSprite('backgrounds/' + curStage + '/tankWatchtower', 100, 50, 0.5, 0.5, ['watchtower gradient color']);
+						tankWatchtower = new FNFSprite(100, 50).loadGraphic(Paths.image('backgrounds/' + curStage + '/tankWatchtower', ['watchtower gradient color']));
+						tankWatchtower.scrollFactor.set(0.5, 0.5);
 						add(tankWatchtower);
 						
-						tankGround = new FNFSprite('backgrounds/' + curStage + '/tankRolling', 300, 300, 0.5, 0.5, ['BG tank w lighting'], true);
+						tankGround = new FNFSprite(300, 300).loadGraphic(Paths.image('backgrounds/' + curStage + '/tankRolling', ['BG tank w lighting'], true));
+						tankGround.scrollFactor.set(0.5, 0.5);
 						add(tankGround);
 						
 						tankmanRun = new FlxTypedGroup<TankmenBG>();
 						add(tankmanRun);
 						
-						var ground:FNFSprite = new FNFSprite('backgrounds/' + curStage + '/tankGround', -420, -150);
+						var ground:FNFSprite = new FNFSprite(-420, -150).loadGraphic(Paths.image('backgrounds/' + curStage + '/tankGround'));
 						ground.setGraphicSize(Std.int(ground.width * 1.15));
 						ground.updateHitbox();
 						add(ground);
 						moveTank();
 
-						var tankdude0:FNFSprite = new FNFSprite('backgrounds/' + curStage + '/tank0', -500, 650, 1.7, 1.5, ['fg']);
+						var tankdude0:FNFSprite = new FNFSprite(-500, 650).loadGraphic(Paths.image('backgrounds/' + curStage + '/tank0', ['fg']);
+						bg.scrollFactor.set(1.7, 1.5);
 						foregroundSprites.add(tankdude0);
 						
-						var tankdude1:FNFSprite = new FNFSprite('backgrounds/' + curStage + '/tank1', -300, 750, 2, 0.2, ['fg']);
+						var tankdude1:FNFSprite = new FNFSprite(-300, 750).loadGraphic(Paths.image('backgrounds/' + curStage + '/tank1', ['fg']);
+						bg.scrollFactor.set(2, 0.2);
 						foregroundSprites.add(tankdude1);
 						
-						var tankdude2:FNFSprite = new FNFSprite('backgrounds/' + curStage + '/tank2', 450, 940, 1.5, 1.5, ['foreground']);
+						var tankdude2:FNFSprite = new FNFSprite(450, 940).loadGraphic(Paths.image('backgrounds/' + curStage + '/tank2', ['foreground']);
+						bg.scrollFactor.set(1.5, 1.5);
 						foregroundSprites.add(tankdude2);
 						
-						var tankdude4:FNFSprite = new FNFSprite('backgrounds/' + curStage + '/tank4', 1300, 900, 1.5, 1.5, ['fg']);
+						var tankdude4:FNFSprite = new FNFSprite(1300, 900).loadGraphic(Paths.image('backgrounds/' + curStage + '/tank4', ['fg']);
+						bg.scrollFactor.set(1.5, 1.5);
 						foregroundSprites.add(tankdude4);
-						
-						var tankdude5:FNFSprite = new FNFSprite('backgrounds/' + curStage + '/tank5', 1620, 700, 1.5, 1.5, ['fg']);
+				
+						var tankdude5:FNFSprite = new FNFSprite(1620, 700).loadGraphic(Paths.image('backgrounds/' + curStage + '/tank5', ['fg']);
+						bg.scrollFactor.set(1.5, 1.5);
 						foregroundSprites.add(tankdude5);
 						
-						var tankdude3:FNFSprite = new FNFSprite('backgrounds/' + curStage + '/tank3', 1300, 1200, 3.5, 2.5, ['fg']);
+						var tankdude3:FNFSprite = new FNFSprite(1300, 1200).loadGraphic(Paths.image('backgrounds/' + curStage + '/tank3', ['fg']);
+						bg.scrollFactor.set(3.5, 2.5);
 						foregroundSprites.add(tankdude3);
 
 			default:
@@ -459,7 +479,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				gfVersion = 'gf-tankmen';
 		}
 		
-		if (PlzyState.SONG.song.toLowerCase() == 'stress')
+		if (PlayState.SONG.song.toLowerCase() == 'stress')
 			gfVersion = 'pico-speaker';
 
 		gf = new Character(400, 130, gfVersion);
@@ -544,6 +564,17 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				boyfriend.y += 220;
 				gf.x += 180;
 				gf.y += 300;
+			case 'tank':
+				gf.y += 10;
+				gf.x -= 30;
+				boyfriend.x += 40;
+				boyfriend.y += 0;
+				dad.y += 60;
+				dad.x -= 80;
+				if (gfVersion != 'pico-speaker')
+				{
+					gf.x -= 170;
+					gf.y -= 75;
 		}
 	}
 
@@ -674,8 +705,6 @@ class Stage extends FlxTypedGroup<FlxBasic>
 	
 	function moveTank():Void
 	{
-		if (!inCutscene)
-		{
 			tankAngle += tankSpeed * FlxG.elapsed;
 			tankGround.angle = (tankAngle - 90 + 15);
 			tankGround.x = tankX + 1500 * Math.cos(Math.PI / 180 * (1 * tankAngle + 180));
