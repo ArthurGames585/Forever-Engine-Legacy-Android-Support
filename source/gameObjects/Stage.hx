@@ -645,6 +645,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				}
 		}
 	}
+}
 
 	public function stageUpdateConstant(elapsed:Float, boyfriend:Boyfriend, gf:Character, dadOpponent:Character)
 	{
