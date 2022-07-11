@@ -1,7 +1,8 @@
 package;
 
 import flixel.FlxG;
-import flixel.FNFSprite;
+import flixel.FlxSprite;
+import meta.data.dependency.FNFSprite;
 import meta.data.Conductor;
 
 class TankmenBG extends FNFSprite
