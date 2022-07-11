@@ -606,8 +606,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 			case 'school':
 				bgGirls.dance();
 				
-		   case 'tank':
-				moveTank();
+			case 'tank':
+				moveTank(elapsed);
 
 			case 'philly':
 				if (!trainMoving)
@@ -643,14 +643,18 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					trainCooldown = FlxG.random.int(-4, 0);
 					trainStart();
 				}
-		}
-	}
-}
+		    }
+	     }
+      }
+  }
 
 	public function stageUpdateConstant(elapsed:Float, boyfriend:Boyfriend, gf:Character, dadOpponent:Character)
 	{
 		switch (PlayState.curStage)
 		{
+		case 'tank':
+				moveTank(elapsed);
+				
 			case 'philly':
 				if (trainMoving)
 				{
@@ -663,7 +667,6 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					}
 				}
 		}
-	}
 
 	// PHILLY STUFFS!
 	function trainStart():Void
