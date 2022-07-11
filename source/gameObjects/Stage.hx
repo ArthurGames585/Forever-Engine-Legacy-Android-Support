@@ -20,6 +20,8 @@ import meta.data.Conductor;
 import meta.data.dependency.FNFSprite;
 import meta.state.PlayState;
 
+var inCutscene:Bool = false;
+
 using StringTools;
 
 /**
@@ -46,18 +48,16 @@ class Stage extends FlxTypedGroup<FlxBasic>
 
 	var bgGirls:BackgroundGirls;
 	
-	var tankWatchtower:FNFSprite;
-	var tankGround:FNFSprite;
+	var tankWatchtower:BGSprite;
+	var tankGround:BGSprite;
 	var tankmanRun:FlxTypedGroup<TankmenBG>;
 
 	public var curStage:String;
-	
-	private var gf:Character;
 
 	var daPixelZoom = PlayState.daPixelZoom;
 
-	public var foregroundSprites:FlxTypedGroup<FlxBasic>;
 	public var foreground:FlxTypedGroup<FlxBasic>;
+	public var foregroundSprites:FlxTypedGroup<FlxBasic>;
 
 	public function new(curStage)
 	{
@@ -86,7 +86,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				case 'thorns':
 					curStage = 'schoolEvil';
 				case 'ugh' | 'guns' | 'stress':
-					curStage = 'highway';
+				curStage = 'tank';
 				default:
 					curStage = 'stage';
 			}
@@ -95,9 +95,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		}
 
 		// to apply to foreground use foreground.add(); instead of add();
-		foregroundSprites = new FlxTypedGroup<FlxBasic>();
 		foreground = new FlxTypedGroup<FlxBasic>();
-		
+		foregroundSprites = new FlxTypedGroup<FlxBasic>();
 
 		//
 		switch (curStage)
@@ -346,7 +345,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				bg.scrollFactor.set(0.8, 0.9);
 				bg.scale.set(6, 6);
 				add(bg);
-			case 'tank':
+				
+				case 'tank':
 						PlayState.defaultCamZoom = 0.9;
 						curStage = 'tank';
 						
@@ -605,8 +605,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 
 			case 'school':
 				bgGirls.dance();
-			
-	       case 'tank':
+				
+		   case 'tank':
 				moveTank();
 
 			case 'philly':
@@ -660,6 +660,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 						updateTrainPos(gf);
 						trainFrameTiming = 0;
 					}
+				}
 		}
 	}
 
@@ -697,14 +698,10 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		}
 	}
 	
-	var tankResetShit:Bool = false;
-	var tankMoving:Bool = false;
-	var tankAngle:Float = FlxG.random.int(-90, 45);
-	var tankSpeed:Float = FlxG.random.float(5, 7);
-	var tankX:Float = 400;
-	
 	function moveTank():Void
 	{
+		if (!inCutscene)
+		{
 			tankAngle += tankSpeed * FlxG.elapsed;
 			tankGround.angle = (tankAngle - 90 + 15);
 			tankGround.x = tankX + 1500 * Math.cos(Math.PI / 180 * (1 * tankAngle + 180));
