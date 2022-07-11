@@ -50,9 +50,6 @@ class Stage extends FlxTypedGroup<FNFSprite>
 	var tankGround:FNFSprite;
 	var tankmanRun:FlxTypedGroup<TankmenBG>;
 	
-	Conductor.mapBPMChanges(SONG);
-	Conductor.changeBPM(SONG.bpm);
-
 	public var curStage:String;
 
 	var daPixelZoom = PlayState.daPixelZoom;
@@ -464,7 +461,7 @@ class Stage extends FlxTypedGroup<FNFSprite>
 					gfVersion = 'gf-tankmen';
 		}
 		
-		if (SONG.song.toLowerCase() == 'stress')
+		if (PlayState.SONG.song.toLowerCase() == 'stress')
 			gfVersion = 'pico-speaker';
 
 		gf = new Character(400, 130, gfVersion);
