@@ -403,27 +403,27 @@ class Stage extends FlxTypedGroup<FlxBasic>
 						add(ground);
 						moveTank();
 
-						var tankdude0:FNFSprite = new FNFSprite(-500, 650).loadGraphic(Paths.image('backgrounds/' + curStage + '/tank0', ['fg']);
+						var tankdude0:FNFSprite = new FNFSprite(-500, 650).loadGraphic(Paths.image('backgrounds/' + curStage + '/tank0', ['fg']));
 						bg.scrollFactor.set(1.7, 1.5);
 						foregroundSprites.add(tankdude0);
 						
-						var tankdude1:FNFSprite = new FNFSprite(-300, 750).loadGraphic(Paths.image('backgrounds/' + curStage + '/tank1', ['fg']);
+						var tankdude1:FNFSprite = new FNFSprite(-300, 750).loadGraphic(Paths.image('backgrounds/' + curStage + '/tank1', ['fg']));
 						bg.scrollFactor.set(2, 0.2);
 						foregroundSprites.add(tankdude1);
 						
-						var tankdude2:FNFSprite = new FNFSprite(450, 940).loadGraphic(Paths.image('backgrounds/' + curStage + '/tank2', ['foreground']);
+						var tankdude2:FNFSprite = new FNFSprite(450, 940).loadGraphic(Paths.image('backgrounds/' + curStage + '/tank2', ['foreground']));
 						bg.scrollFactor.set(1.5, 1.5);
 						foregroundSprites.add(tankdude2);
 						
-						var tankdude4:FNFSprite = new FNFSprite(1300, 900).loadGraphic(Paths.image('backgrounds/' + curStage + '/tank4', ['fg']);
+						var tankdude4:FNFSprite = new FNFSprite(1300, 900).loadGraphic(Paths.image('backgrounds/' + curStage + '/tank4', ['fg']));
 						bg.scrollFactor.set(1.5, 1.5);
 						foregroundSprites.add(tankdude4);
 				
-						var tankdude5:FNFSprite = new FNFSprite(1620, 700).loadGraphic(Paths.image('backgrounds/' + curStage + '/tank5', ['fg']);
+						var tankdude5:FNFSprite = new FNFSprite(1620, 700).loadGraphic(Paths.image('backgrounds/' + curStage + '/tank5', ['fg']));
 						bg.scrollFactor.set(1.5, 1.5);
 						foregroundSprites.add(tankdude5);
 						
-						var tankdude3:FNFSprite = new FNFSprite(1300, 1200).loadGraphic(Paths.image('backgrounds/' + curStage + '/tank3', ['fg']);
+						var tankdude3:FNFSprite = new FNFSprite(1300, 1200).loadGraphic(Paths.image('backgrounds/' + curStage + '/tank3', ['fg']));
 						bg.scrollFactor.set(3.5, 2.5);
 						foregroundSprites.add(tankdude3);
 
