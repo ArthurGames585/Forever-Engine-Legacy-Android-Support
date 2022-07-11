@@ -1,9 +1,10 @@
 package;
 
 import flixel.FlxG;
-import flixel.FlxSprite;
+import flixel.FNFSprite;
+import meta.data.Conductor;
 
-class TankmenBG extends FlxSprite
+class TankmenBG extends FNFSprite
 {
 	public static var animationNotes:Array<Dynamic> = [];
 
