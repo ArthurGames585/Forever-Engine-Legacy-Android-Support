@@ -661,7 +661,6 @@ class Stage extends FlxTypedGroup<FlxBasic>
 	    case 'tank':
 				moveTank();
 		}
-	}
 
 	// PHILLY STUFFS!
 	function trainStart():Void
