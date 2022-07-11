@@ -605,6 +605,9 @@ class Stage extends FlxTypedGroup<FlxBasic>
 
 			case 'school':
 				bgGirls.dance();
+			
+	       case 'tank':
+				moveTank();
 
 			case 'philly':
 				if (!trainMoving)
@@ -657,10 +660,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 						updateTrainPos(gf);
 						trainFrameTiming = 0;
 					}
-				}
-	    case 'tank':
-				moveTank();
 		}
+	}
 
 	// PHILLY STUFFS!
 	function trainStart():Void
