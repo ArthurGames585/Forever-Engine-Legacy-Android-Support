@@ -54,8 +54,7 @@ class Stage extends FlxTypedGroup<FNFSprite>
 
 	var daPixelZoom = PlayState.daPixelZoom;
 
-	public var foregroundSprites:FlxTypedGroup<FlxBasic>;FlxBasic
-	public var foreground:FlxTypedGroup<>;
+	public var foregroundSprites:FlxTypedGroup<FlxBasic>;
 
 	public function new(curStage)
 	{
